@@ -1,0 +1,24 @@
+.actual-login-form {
+    display: flex !important;
+    flex-direction: column;
+    align-content: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: #eee;
+    padding: 20px;
+    width: 40vw;
+}
+
+.login-button {
+    text-align: center !important;
+    align-self: center !important;
+}
+.input-form-login {
+    width: 100%;
+}
+@media only screen and (max-width: 800px) {
+    .actual-login-form {      
+        width: 100vw;
+    }   
+
+}

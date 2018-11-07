@@ -1,0 +1,26 @@
+.icon-profile {
+    font-size: 16pt;
+}
+
+.profile-item {
+    width: 24vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: #eee;
+
+}
+
+.profile-menu {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    z-index: 99;
+}

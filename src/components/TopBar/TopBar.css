@@ -1,0 +1,14 @@
+.top-bar{
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    top: 0;
+    position: fixed;
+    z-index: 99;
+    background-color: white;
+    border-bottom: 1px solid gray
+}
