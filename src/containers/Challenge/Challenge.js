@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import IndividualChallenge from '../../components/IndividualChallenge/IndividualChallenge.js'
-import { Route } from "react-router-dom";
 import {Button} from 'antd';
 import {Redirect} from 'react-router-dom'
+
+import QrReader from "react-qr-reader";
 
 class Challenge extends React.Component {
    
@@ -15,9 +16,11 @@ class Challenge extends React.Component {
         this.state={
             complex: false,
             simple: false,
-            typeChallenge: 'none'
+            typeChallenge: 'none',
+            result: "No result"
         }
         this.complexChallenge= this.complexChallenge.bind(this);
+        this.handleScan = this.handleScan.bind(this);
     }
 
     complexChallenge = ()=>{
@@ -38,37 +41,119 @@ class Challenge extends React.Component {
         }) 
        
     }
+    handleQR = ()=>{
+        this.setState({
+            typeChallenge: 'qr'
+        }) 
+    }
+    handleScan(data) {
+        if (data) {
+            console.log(data)
+          this.setState({
+            typeChallenge: data,
+            result: data
+          });
+          //this.props.history.push(data);
+        }
+        
+      }
+      handleError(err) {
+        console.error(err);
+      }
 
     render() {
-        const {challenges, auth} = this.props;
+        const {challenges, auth, complex} = this.props;
 
+      // console.log(this.props);
+        const number= challenges ? Math.floor(Math.random()*(challenges.length -1)):0;
+        const numberComplex = complex ? Math.floor(Math.random()*(complex.length -1)):0;
         
-        const number= Math.floor(Math.random()*6);
-        let myChallenge = challenges ? challenges[number].descripcion : null;
+        let myChallenge = challenges ? challenges[number] : null;
+        let complexChallenge = complex ? complex[numberComplex] : null;
      //   let myComplexChallenge = this.props.ComplexChallenges ? this.props.ComplexChallenges[number] : null;   
      if(!auth.uid) return <Redirect to='/login'/>
-     console.log(myChallenge);
-         return (
-             <section className='challenge'>
-                  {/* <Button style={{margin:'10px'}} type="primary" onClick={this.complexChallenge}  className="login-button">
-                        Retos compuestos
-                    </Button>
-                    <Button style={{margin:'10px'}} type="primary" onClick={this.simpleChallenge}  className="login-button">
-                        Retos Simples
-         </Button> */}
-                   
-                <IndividualChallenge challenge={myChallenge} volver={this.noChallenge} />
-                 {/* <Route exact path='/basic'  render={(props) => <IndividualChallenge {...props} challenge={myChallenge}/>}/> */}
-                 
-             </section>
+    
+      
             
-        );
+                
+                
+                    switch(this.state.typeChallenge){
+                        case 'none':
+                        return(
+                        <section className='challenge'>
+
+                        <div className='buttons'>
+                        <Button style={{margin:'10px'}} type="primary" onClick={this.complexChallenge}  className="login-button">
+                                Retos compuestos
+                        </Button>
+                        <Button style={{margin:'10px'}} type="primary" onClick={this.simpleChallenge}  className="login-button">
+                                Retos Simples
+                        </Button>
+                        <Button style={{margin:'10px'}} type="primary" onClick={this.handleQR}  className="login-button">
+                                Leer código
+                        </Button>
+                    </div>
+                    </section>)
+                        case 'simple':
+                        return (
+                        <section className='challenge'>
+
+                        <IndividualChallenge challenge={myChallenge} volver={this.noChallenge} type={this.state.typeChallenge}/>
+                        </section>);
+
+                        case 'complex':
+                        return (
+                        <section className='challenge'>
+
+                        <IndividualChallenge challenge={complexChallenge} volver={this.noChallenge} type={this.state.typeChallenge}/>
+                        </section>)
+                        case 'qr':
+                        return (
+                        <section className='challenge'>
+
+                        <div className="qr-container">
+                        <h1>Escanea el codigo que hay en el tablero</h1>
+                        <QrReader
+                  delay={100}
+                  onError={this.handleError}
+                  onScan={this.handleScan}
+                  style={{ width: "100vw" }}
+                />
+                <p>{this.state.result}</p>
+                </div>
+                </section>)
+                        default:
+                        return (
+                            <section className='challenge'>
+
+                        <div className="qr-container">
+                        <h1>Por favor, escanea un código válido</h1>
+                        <QrReader
+                  delay={100}
+                  onError={this.handleError}
+                  onScan={this.handleScan}
+                  style={{ width: "100vw" }}
+                />
+                <p>{this.state.result}</p>
+                </div>
+                </section>
+                            )
+                    }
+                
+                
+
+
+               
+             
+            
+        
     }
 };
 
 const mapStateToProps = (state)=>{
-        console.log(state);
+    //    console.log(state);
     return {
+        complex: state.firestore.ordered.complex,
         challenges: state.firestore.ordered.challenges,
         auth: state.firebase.auth
     }
@@ -77,6 +162,7 @@ const mapStateToProps = (state)=>{
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
+        {collection: 'complex'},
         {collection: 'challenges'}
     ])
 )(Challenge);

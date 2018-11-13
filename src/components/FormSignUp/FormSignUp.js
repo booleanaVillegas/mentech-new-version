@@ -1,7 +1,7 @@
 import React from 'react';
 import './FormSignUp.css';
 import { Form, Input, Button,Select , Alert} from 'antd';
-import { BrowserRouter as Router , Link } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 const FormItem = Form.Item;
 const Option = Select.Option;
 

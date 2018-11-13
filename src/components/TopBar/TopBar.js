@@ -1,11 +1,27 @@
 import React from 'react';
 import './TopBar.css';
-const TopBar = () => {
+import {withRouter} from 'react-router'
+import { connect } from 'react-redux';
+
+const TopBar = (props) => {
+    const {auth}= props
+    if(auth.uid){
     return (
         <div className='top-bar'>
-           <h1 style={{fontSize:'20px'}}>Perfil</h1> 
+           <h1 className='title'>
+           {props.location.pathname.substr(1, props.location.pathname.length-1).length>1?props.location.pathname.substr(1, props.location.pathname.length-1):'home'}</h1> 
+           
         </div>
     );
+}else{
+    return(<div></div>)
+}
 };
-
-export default TopBar;
+const mapStateToProps = (state)=>{
+    // console.log(state);
+        return{
+            auth: state.firebase.auth
+        }
+    }
+    
+    export default withRouter(connect(mapStateToProps)(TopBar))

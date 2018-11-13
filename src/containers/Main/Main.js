@@ -6,24 +6,21 @@ import {signOut} from '../../redux/actions/authActions'
 import {Redirect} from 'react-router-dom'
 
 class Main extends React.Component {
-    constructor(props){
-        super(props)}
-
+    
     render(){
-const {auth} = this.props;
-if(!auth.uid) return <Redirect to='/login'/>
-  return ( 
+        const {auth} = this.props;
+        if(!auth.uid) return <Redirect to='/login'/>
+        return ( 
         <section className='main'>
-        <h1 style={{padding: '15px'}}> Hola esta es la pagina principal 
-         Elige una de las opciones de abajo </h1>
-         
-        <Button style={{marginBottom:'20px'}} type="primary" onClick={this.props.signOut}  className="login-button">
-            Log out
-        </Button>
-      </section>
+            <h1 style={{padding: '15px'}}> Aún no hay fotos o videos subidos, podrás verlos en unas semans </h1>
+            
+            <Button style={{marginBottom:'20px'}} type="primary" onClick={this.props.signOut}  className="login-button">
+            Cerrar Sesión
+            </Button>
+        </section>
      
-   ) ;
-}
+        ) ;
+    }
 };
 const mapStateToProps = (state) =>{
     console.log(state);

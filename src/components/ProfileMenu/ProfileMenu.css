@@ -3,24 +3,29 @@
 }
 
 .profile-item {
-    width: 24vw;
-    height: 10vh;
+    width: 32vw;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     align-items: center;
-    background-color: #eee;
-
+    
+   
 }
+
+
 
 .profile-menu {
     width: 100vw;
-    height: 10vh;
+    height: 15vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
     align-items: center;
     z-index: 99;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0px 0px 5px #ccc;
+    border-top: 1px solid #eee;
 }

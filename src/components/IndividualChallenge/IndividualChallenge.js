@@ -3,54 +3,54 @@ import {Button} from 'antd';
 import './IndividualChallenge.css';
 
 const IndividualChallenge = (props) => {
-    /*switch (props.type) {
+    switch (props.type) {
         case 'complex':
         return (
         
             <section className='indv-challenge'>
-            <figure className="fig-challenge"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
-                <h1 style={{ padding: '15px', fontSize:'20pt' }}>Trabajo en equipo</h1>
-                <p className='text-challenge'>{props.challenge}</p>
+           
+                <h1 style={{ padding: '15px', fontSize:'20pt' }}>Conflicto</h1>
+                <p className='text-challenge'>{props.challenge.identificacion}</p>
+                <p className='text-challenge'>{props.challenge.posibilitacion}</p>
+                <p className='text-challenge'>{props.challenge.proposicion}</p>
                 <Button style={{marginBottom:'20px'}} type="primary" onClick={props.volver}  className="login-button">
                         Volver
                     </Button>
             </section>
         
-    );
-        break;
+            );
+        
         case 'simple':
         return (
         
             <section className='indv-challenge'>
             <figure className="fig-challenge"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
-                <h1 style={{ padding: '15px', fontSize:'20pt' }}>Trabajo en equipo</h1>
-                <p className='text-challenge'>{props.challenge}</p>
+                <h1 style={{ padding: '15px', fontSize:'20pt' }}>{props.challenge.tema}</h1>
+                <p className='text-challenge'>{props.challenge.descripcion}</p>
                 <Button style={{marginBottom:'20px'}} type="primary" onClick={props.volver}  className="login-button">
                         Volver
                     </Button>
             </section>
         
-    );
-        break;
+            );
+        
         case 'none':
         return <div></div>
-        break;
-        dafault:
+        
+        default:
         return <div></div>
-        break;
-    }*/
-    return (
+        
+    }
+   /* return (
         
             <section className='indv-challenge'>
             <figure className="fig-challenge"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
                 <h1 style={{ padding: '15px', fontSize:'20pt' }}>Trabajo en equipo</h1>
                 <p className='text-challenge'>{props.challenge}</p>
-               {/* <Button style={{marginBottom:'20px'}} type="primary" onClick={props.volver}  className="login-button">
-                        Volver
-                 </Button> */}
+              
             </section>
         
-    );
+    );*/
 };
 
 export default IndividualChallenge;

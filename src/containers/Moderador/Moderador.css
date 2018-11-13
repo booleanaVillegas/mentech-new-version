@@ -1,9 +1,13 @@
-.learned{
+.moderador{
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-content: center;
     align-items: center;
-    
+    align-content: center;
+
+}
+.input-moderador{
+
+ background-color: aqua
 }

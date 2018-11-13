@@ -6,13 +6,16 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import ProfileInfo from '../../components/ProfileInfo/ProfileInfo.js'
 import ProfileMenu from '../../components/ProfileMenu/ProfileMenu.js'
+import Logros from '../../components/Logros/Logros.js'
 
 class Profile extends React.Component {
 
     constructor(props){
         super(props);
-
         this.uploadPicture= this.uploadPicture.bind(this);
+
+
+        
     }
 
     uploadPicture = ()=>{
@@ -20,9 +23,20 @@ class Profile extends React.Component {
     }
     
     render(){
-        const {auth, profile} = this.props;
-        if(!auth.uid) return <Redirect to='/login'/>  
-        
+        const {auth, profile, logros} = this.props;
+        if(!auth.uid) return <Redirect to='/login'/>;
+ 
+     let logrosPersona = [];
+       if(logros && profile.logros)  {        
+            for(let j=0; j<profile.logros.length; j++){
+                //console.log(logros[profile.logros[j]])
+                   logrosPersona.push(logros[profile.logros[j]]);
+            
+            }
+        }
+          
+         
+
   return ( 
     <section className='profile'>
         <ProfileInfo
@@ -33,23 +47,27 @@ class Profile extends React.Component {
         level={profile.nivel}
         editProfile={this.uploadPicture}
         />
-        <ProfileMenu />
+        <ProfileMenu />        
+        <Logros
+        logros={logrosPersona}/>
     </section>
      
    ) ;
 }
 };
 const mapStateToProps = (state) =>{
-    console.log(state);
+  // console.log(state);
     return{
         auth: state.firebase.auth,
         profile: state.firebase.profile,
+        logros: state.firestore.data.logros,
     }
 }
 
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        {collection: 'users'}
+        {collection: 'users'},
+        {collection: 'logros'}
     ])
 )(Profile);
