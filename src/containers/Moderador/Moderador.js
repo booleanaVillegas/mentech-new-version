@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AutoComplete } from 'antd';
+import { AutoComplete , Button} from 'antd';
 import './Moderador.css';
-
+import { newPartida } from '../../redux/actions/partidaActions'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 
 const Option = AutoComplete.Option;
+const users = [];
 
 class Moderador extends Component {
-    state = {
-        usersAutoC: [],
-        valueAuto: ''
-      }
+
+    constructor(props){
+        super(props)
+        this.state = {
+            usersAutoC: [],
+            usersForPartida: []
+          }
+          
+    }
+    
 
       handleSearch = (value) => {
         let temp = []; 
@@ -27,18 +34,19 @@ class Moderador extends Component {
       //  console.log(this.props.users)
         this.setState({
             usersAutoC: temp,
-valueAuto: value
+            valueAuto: value
         });
-      }
-      onSelect= (value) => {
-        this.setState({
-valueAuto: value
-        });
-        console.log('onSelect', this.state.valueAuto);
-        this.setState({
-            valueAuto: ''
-                    });
-      }
+        }
+        onSelect = (value) => {
+       users.push(value)
+           this.setState({
+               usersForPartida: users
+           })
+           console.log(this.state.usersForPartida);
+        }
+        agregarPartida = () => {
+this.props.crearPartida({jugadores: this.state.usersForPartida})
+        }
 
       render() {
 
@@ -50,13 +58,16 @@ valueAuto: value
             <section className='moderador'>
          <AutoComplete
         style={{ width: '90%' }}
-        value= {this.state.valueAuto}
         onSearch={this.handleSearch}
         placeholder="Agrega a los mentores a la partida"
         onSelect={this.onSelect}
       >
         {children}
       </AutoComplete>
+
+      <Button type="primary" onClick={this.agregarPartida} className="login-button">
+           Crear partida
+          </Button>
           </section>
         );
       }
@@ -69,9 +80,14 @@ function mapStateToProps(state) {
         users: state.firestore.ordered.users,
     };
 }
+const mapDispatchToProps = (dispatch) => {
+    return{
+      crearPartida : (partida) => dispatch(newPartida(partida))
+    }
+}
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps,mapDispatchToProps),
     firestoreConnect([
         {collection: 'users'}
        
