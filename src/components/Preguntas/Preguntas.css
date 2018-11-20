@@ -1,0 +1,22 @@
+.preguntas {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.actual-question {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.question-item {
+    font-size: 12pt;
+    margin: 12px;
+}
