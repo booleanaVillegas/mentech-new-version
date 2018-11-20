@@ -1,7 +1,8 @@
 .logros{
     width: 100vw;
     height: 60vh;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -29,4 +30,20 @@
     margin: 10px;
     width: 10vw;
      height: 10vw
+}
+@media only screen and (min-width: 800px) {
+    .logros{
+        width: 40vw;
+        height: 60vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .img-logro{
+        margin: 10px;
+        width: 30px;
+         height: 30px
+    }
 }

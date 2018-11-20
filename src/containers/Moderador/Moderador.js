@@ -20,7 +20,6 @@ class Moderador extends Component {
           
     }
     
-
       handleSearch = (value) => {
         let temp = []; 
         let users = this.props.users;
@@ -42,32 +41,58 @@ class Moderador extends Component {
            this.setState({
                usersForPartida: users
            })
-           console.log(this.state.usersForPartida);
+           console.log(value);
+          var element = document.getElementById('autocomplete');
+          console.log(element)
+          /*   element.parentNode.removeChild(element);
+          console.log(  document.getElementById('autocomplete').getElementsByClassName("ant-input")[0])
+        */
         }
         agregarPartida = () => {
-this.props.crearPartida({jugadores: this.state.usersForPartida})
+        
+            this.props.crearPartida({jugadores: this.state.usersForPartida})
         }
 
       render() {
 
+       const {usersPorId} = this.props;
+       const chosen = usersPorId?this.state.usersForPartida.map(function(user, i){
+            return <li key={i}>{usersPorId[user].nombre+" "+usersPorId[user].apellido}</li>;
+        }):null;
+        
         const children = this.state.usersAutoC.map(function(user, i){
             return <Option value={user.id} key={i}>{user.nombre+" "+user.apellido}</Option>;
         });
-
+       // console.log(usersPorId);
+       // console.log(users);
         return (
             <section className='moderador'>
-         <AutoComplete
-        style={{ width: '90%' }}
-        onSearch={this.handleSearch}
-        placeholder="Agrega a los mentores a la partida"
-        onSelect={this.onSelect}
-      >
-        {children}
-      </AutoComplete>
+        <div className="container-autocomplete">
+        <h1 className="title">Elige aqui a los jugadores</h1>
+                <AutoComplete
+                id= 'autocomplete'
+                style={{ width: '90%' }}
+                onSearch={this.handleSearch}
+                placeholder="Agrega a los mentores a la partida"
+                onSelect={this.onSelect}
+        allowClear={true}
+            >
+                {children}
+            </AutoComplete>
 
-      <Button type="primary" onClick={this.agregarPartida} className="login-button">
+     
+          </div>
+       <div className="container-users-puntos">
+       <h1 className="title">Jugadores elegidos</h1>
+        <ul>
+
+            {chosen}
+
+        </ul>
+        <Button type="primary" onClick={this.agregarPartida} className="login-button">
            Crear partida
           </Button>
+        </div> 
           </section>
         );
       }
@@ -78,6 +103,7 @@ this.props.crearPartida({jugadores: this.state.usersForPartida})
 function mapStateToProps(state) {
     return {
         users: state.firestore.ordered.users,
+        usersPorId: state.firestore.data.users
     };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -90,6 +116,5 @@ export default compose(
     connect(mapStateToProps,mapDispatchToProps),
     firestoreConnect([
         {collection: 'users'}
-       
     ])
 )(Moderador);

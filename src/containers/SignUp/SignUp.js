@@ -46,7 +46,10 @@ handleChangeBarrio = (e)=>{
 handleSubmit = (e) =>{
     e.preventDefault();
     console.log("holita");
-    this.props.signUp(this.state)
+    if(this.state.confPass === this.state.password){
+      this.props.signUp(this.state)
+    }
+    
 }
 
   render() {

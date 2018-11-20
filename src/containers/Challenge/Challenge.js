@@ -60,6 +60,9 @@ class Challenge extends React.Component {
       handleError(err) {
         console.error(err);
       }
+      handleQuestion=()=>{
+
+      }
 
     render() {
         const {challenges, auth, complex} = this.props;
@@ -92,6 +95,9 @@ class Challenge extends React.Component {
                         <Button style={{margin:'10px'}} type="primary" onClick={this.handleQR}  className="login-button">
                                 Leer código
                         </Button>
+                        <Button style={{margin:'10px'}} type="primary" onClick={this.handleQuestion}  className="login-button">
+                                Pregunta
+                        </Button>
                     </div>
                     </section>)
                         case 'simple':
@@ -117,7 +123,7 @@ class Challenge extends React.Component {
                   delay={100}
                   onError={this.handleError}
                   onScan={this.handleScan}
-                  style={{ width: "100vw" }}
+                  className='qr-reader'
                 />
                 <p>{this.state.result}</p>
                 </div>
@@ -132,7 +138,8 @@ class Challenge extends React.Component {
                   delay={100}
                   onError={this.handleError}
                   onScan={this.handleScan}
-                  style={{ width: "100vw" }}
+                                 
+                  className='qr-reader'
                 />
                 <p>{this.state.result}</p>
                 </div>

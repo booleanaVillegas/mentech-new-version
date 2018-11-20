@@ -8,7 +8,8 @@ const IndividualChallenge = (props) => {
         return (
         
             <section className='indv-challenge'>
-           
+            <figure className="fig-challenge-complex"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
+               <div className="cont-info-reto">
                 <h1 style={{ padding: '15px', fontSize:'20pt' }}>Conflicto</h1>
                 <p className='text-challenge'>{props.challenge.identificacion}</p>
                 <p className='text-challenge'>{props.challenge.posibilitacion}</p>
@@ -16,6 +17,7 @@ const IndividualChallenge = (props) => {
                 <Button style={{marginBottom:'20px'}} type="primary" onClick={props.volver}  className="login-button">
                         Volver
                     </Button>
+                    </div>
             </section>
         
             );
@@ -25,11 +27,13 @@ const IndividualChallenge = (props) => {
         
             <section className='indv-challenge'>
             <figure className="fig-challenge"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
+                <div className='cont-info-reto'>
                 <h1 style={{ padding: '15px', fontSize:'20pt' }}>{props.challenge.tema}</h1>
                 <p className='text-challenge'>{props.challenge.descripcion}</p>
                 <Button style={{marginBottom:'20px'}} type="primary" onClick={props.volver}  className="login-button">
                         Volver
                     </Button>
+                    </div>
             </section>
         
             );

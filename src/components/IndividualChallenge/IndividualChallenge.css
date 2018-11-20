@@ -17,8 +17,38 @@
 }
 .fig-challenge{
     width: 50vw;
-    position: relative;    
-
-
-   
+    position: relative;      
 }
+.fig-challenge-complex{
+    display: none      
+}
+.cont-info-reto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+@media only screen and (min-width: 800px) {
+    .indv-challenge{
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: center;   
+       
+    }
+    .text-challenge{
+        width: 30vw;
+    }
+    .fig-challenge{
+        width: 15vw;
+        position: relative;      
+    }
+    .fig-challenge-complex{
+        display: block;
+        width: 15vw;
+        position: relative;        
+    }
+   }

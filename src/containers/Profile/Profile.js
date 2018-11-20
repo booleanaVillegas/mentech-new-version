@@ -39,17 +39,21 @@ class Profile extends React.Component {
 
   return ( 
     <section className='profile'>
-        <ProfileInfo
-        image={profile.avatar}
-        name= {profile.nombre+" "+profile.apellido}
-        age={profile.edad}
-        barrio={profile.barrio}
-        level={profile.nivel}
-        editProfile={this.uploadPicture}
-        />
-        <ProfileMenu />        
-        <Logros
-        logros={logrosPersona}/>
+        <div className="cont-img-name">
+            <ProfileInfo
+            image={profile.avatar}
+            name= {profile.nombre+" "+profile.apellido}
+            age={profile.edad}
+            barrio={profile.barrio}
+            level={profile.nivel}
+            editProfile={this.uploadPicture}
+            />
+        </div>
+        <div className="cont-logros-menu">
+            <ProfileMenu />        
+            <Logros
+            logros={logrosPersona}/>
+        </div>
     </section>
      
    ) ;
