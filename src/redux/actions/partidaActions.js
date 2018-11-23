@@ -26,7 +26,9 @@ export const newPartida = (partida) => {
                 finalizada: false,
                 equipo1: equipoUno,
                 equipo2: equipoDos,
-                ganador: ''
+                ganador: '',
+                puntos1: 0,
+                puntos2: 0
 
             })
             .then(() => {
@@ -44,6 +46,11 @@ export const newPartida = (partida) => {
 
     }
 }
+
+export const setPuntos =(partida, puntos, equipo) => {
+
+}
+
 
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {

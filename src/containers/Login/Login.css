@@ -10,4 +10,30 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    flex-direction: column;
+}
+.fig-logo{
+    max-width: 60%;  
+    margin-bottom: 100px;
+}
+.img-logo{
+    width: 100%;
+}
+@media only screen and (min-width: 800px) {
+    .login{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+     flex-direction: row;
+    }
+    .fig-logo{
+       margin-right: 100px;
+        max-width: 20%;    
+    }
+    .img-logo{
+        width: 100%;
+    }
 }

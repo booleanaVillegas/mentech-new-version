@@ -1,0 +1,16 @@
+.display-info{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.title-info{
+    font-weight: bold;
+    font-size: 14pt;
+}
+.text-info{
+    padding: 50px
+}

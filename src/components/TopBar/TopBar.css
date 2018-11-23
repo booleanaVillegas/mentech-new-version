@@ -17,8 +17,21 @@
     color: #1d2539;
     font-family: 'Catamaran', sans-serif;
     font-weight: 900;
-    font-size: 30px;
+    font-size: 24pt !important;
     text-transform: uppercase;
     margin: 0;
     padding: 0;
+
+}
+@media only screen and (max-width: 400px) {
+    .title{
+        color: #1d2539;
+        font-family: 'Catamaran', sans-serif;
+        font-weight: 900;
+        font-size: 16pt !important;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 0;
+        
+    }
 }

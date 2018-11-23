@@ -33,7 +33,11 @@ class Login extends React.Component {
         const {auth} = this.props;
         if(auth.uid) return <Redirect to='/'/>   
   return ( 
+
       <section className='login'>
+      <figure className="fig-logo">
+      <img src="/assets/logo.png" alt="" className="img-logo"/>
+      </figure>
         <FormLogin 
         submit={this.handleSubmit} 
         change={this.handleChange}

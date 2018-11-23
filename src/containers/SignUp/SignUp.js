@@ -11,17 +11,13 @@ class SignUp extends Component {
     super(props)
     this.state={
         nombre: '',
-        apellido: '',
         email: '',
         password: '',
-        confPass: '',
-        edad: '',
-        barrio: ''        
+        confPass: '',           
     }
     this.handleChange= this.handleChange.bind(this);
     this.handleSubmit= this.handleSubmit.bind(this);
-    this.handleChangeEdad= this.handleChangeEdad.bind(this);
-    this.handleChangeBarrio= this.handleChangeBarrio.bind(this);
+    
 }
 
 handleChange = (e) =>{
@@ -32,20 +28,9 @@ handleChange = (e) =>{
     console.log(this.state)
     
 }
-handleChangeEdad = (e)=>{
-  this.setState({
-    edad: e
-})
-}
-handleChangeBarrio = (e)=>{
-  this.setState({
-    barrio: e
-})
-}
 
 handleSubmit = (e) =>{
     e.preventDefault();
-    console.log("holita");
     if(this.state.confPass === this.state.password){
       this.props.signUp(this.state)
     }
@@ -57,12 +42,14 @@ handleSubmit = (e) =>{
         if(auth.uid) return <Redirect to='/'/>   
     return (
       <section className='sign-up'>
+       <figure className="fig-logo">
+      <img src="/assets/logo.png" alt="" className="img-logo"/>
+      </figure>
         <FormSignUp 
         submit={this.handleSubmit} 
         change={this.handleChange}
         error={this.props.authError}
-        cEdad={this.handleChangeEdad}
-        cBarrio={this.handleChangeBarrio}
+        
         />
       </section>
     )

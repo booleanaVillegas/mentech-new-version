@@ -1,59 +1,35 @@
 import React from 'react';
 import './FormSignUp.css';
-import { Form, Input, Button,Select , Alert} from 'antd';
-import { BrowserRouter as Router} from "react-router-dom";
+import { Form, Input, Button , Alert, Icon} from 'antd';
+import {Link} from "react-router-dom";
 const FormItem = Form.Item;
-const Option = Select.Option;
+
 
 const FormSignUp = (props) => {
     return (
-        <Router>
+        
         <section className='form-signup-component'>
         <Form onSubmit={props.submit} className="signup-form actual-signup-form" layout="horizontal">
-        <FormItem className='input-form-signup' label='Nombre'>       
-            <Input placeholder="Nombre" id='nombre' onChange={props.change}/>
+        <FormItem className='input-form-signup'>       
+            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Nombre Completo" id='nombre' onChange={props.change}/>
         </FormItem>
-        <FormItem className='input-form-signup' label='Apellido'>       
-            <Input placeholder="Apellido" id='apellido' onChange={props.change}/>
+        <FormItem className='input-form-signup'>       
+            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" id='email' onChange={props.change}/>
         </FormItem>
-        <FormItem className='input-form-signup'label='Correo Electrónico'>       
-            <Input placeholder="Email" id='email' onChange={props.change}/>
+        <FormItem className='input-form-signup'>       
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Contraseña" id='password' type="password"  onChange={props.change}/>
         </FormItem>
-        <FormItem className='input-form-signup'label='Contraseña'>       
-            <Input placeholder="Contraseña" id='password' type="password"  onChange={props.change}/>
+        <FormItem className='input-form-signup'>       
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Confirmar Contraseña" id='confPass' type="password"  onChange={props.change}/>
         </FormItem>
-        <FormItem className='input-form-signup'label='Confirmar contraseña'>       
-            <Input placeholder="Confirmar Contraseña" id='confPass' type="password"  onChange={props.change}/>
-        </FormItem>
-        <FormItem className='input-form-signup'label='Edad'>      
-         
-        <Select style={{ color: 'rgba(0,0,0,.25)' }} id='edad' defaultValue="Edad" onChange={props.cEdad}>
-            <Option id='edad' value="Edad" disabled>Edad</Option>
-            <Option id='edad' value="11">11</Option>
-            <Option id='edad' value="12">12</Option>
-            <Option id='edad' value="13">13</Option>
-            <Option id='edad' value="14">14</Option>
-            <Option id='edad' value="15">15</Option>
-            <Option id='edad' value="16">16</Option>
-            <Option id='edad' value="17">17</Option>
-        </Select>
        
-        </FormItem>
-        <FormItem className='input-form-signup'label='Barrio'>       
-        <Select style={{ color: 'rgba(0,0,0,.25)' }} id='barrio' defaultValue="Barrio" onChange={props.cBarrio}>
-            <Option value="Barrio" disabled>Barrio</Option>
-            <Option value="Potrero Grande">Potrero Grande</Option>
-            <Option value="Conquistadores">Conquistadores</Option>
-            <Option value="Agua Blanca">Agua Blanca</Option>
-            <Option value="Obrero">Obrero</Option>
-            <Option value="Siloe">Siloe</Option>
-            <Option value="Limonar">Limonar</Option>
-            <Option value="Las Granjas">Las Granjas</Option>
-        </Select>
-        </FormItem>
         <Button type="primary" htmlType="submit" className="signup-button" >
         Crear Cuenta
           </Button>
+        <Link to="/login" style={{marginTop:'10px'}}> 
+        <p>Ya tienes una cuenta? Inicia sesión aquí</p>
+        </Link>
+
         </Form>    
         { props.error ?  <Alert
       message="Error"
@@ -63,7 +39,7 @@ const FormSignUp = (props) => {
       closable
     /> : null}
       </section>
-      </Router>
+      
     );
 };
 

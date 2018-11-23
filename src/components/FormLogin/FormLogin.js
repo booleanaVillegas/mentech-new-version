@@ -20,10 +20,10 @@ const FormLogin = (props) => {
         <Button type="primary" htmlType="submit" className="login-button">
             Iniciar sesión
           </Button>
-          <Link to="/signup"> <Button type="primary" className="login-button" style={{marginTop: '10px'}}>
-            Ir al registro
-          </Button>
-          </Link>
+          <Link to="/signup" style={{marginTop:'10px'}}> 
+        <p>No tienes una cuenta? Únete a Mentech aquí</p>
+        </Link>
+          
         </Form> 
         { props.error ?  <Alert
       message="Error"

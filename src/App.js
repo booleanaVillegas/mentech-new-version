@@ -19,9 +19,11 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <section>     
+      <section>   
+          
        <Route path="/" component={NavMenu} />   
-        <Route path="/" component={TopBar} /> 
+       <Route path="/" component={TopBar} /> 
+              
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} /> 
         <Route exact path="/" component={Main} />

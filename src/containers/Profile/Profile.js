@@ -42,9 +42,7 @@ class Profile extends React.Component {
         <div className="cont-img-name">
             <ProfileInfo
             image={profile.avatar}
-            name= {profile.nombre+" "+profile.apellido}
-            age={profile.edad}
-            barrio={profile.barrio}
+            name= {profile.nombre}
             level={profile.nivel}
             editProfile={this.uploadPicture}
             />

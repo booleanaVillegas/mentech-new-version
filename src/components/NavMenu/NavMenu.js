@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './NavMenu.css';
-
+import {withRouter} from 'react-router'
 import {Icon } from 'antd';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 const NavMenu = (props) => {
    
     const {auth}= props
-    if(auth.uid){
+    if(auth.uid && props.location.pathname!=='/moderador'){
     return (
    
         <section className='nav-menu'>                
@@ -35,4 +35,4 @@ const mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps)(NavMenu);
+export default withRouter(connect(mapStateToProps)(NavMenu));

@@ -25,8 +25,7 @@ class Moderador extends Component {
         let users = this.props.users;
 
         for (let i=0; i<users.length; i++){
-            if (users[i].nombre.toLowerCase().includes(value.toLowerCase()) ||
-            users[i].apellido.toLowerCase().includes(value.toLowerCase())){
+            if (users[i].nombre.toLowerCase().includes(value.toLowerCase())){
                 temp.push(users[i]);
             }
         }
@@ -57,11 +56,11 @@ class Moderador extends Component {
 
        const {usersPorId} = this.props;
        const chosen = usersPorId?this.state.usersForPartida.map(function(user, i){
-            return <li key={i}>{usersPorId[user].nombre+" "+usersPorId[user].apellido}</li>;
+            return <li key={i}>{usersPorId[user].nombre}</li>;
         }):null;
         
         const children = this.state.usersAutoC.map(function(user, i){
-            return <Option value={user.id} key={i}>{user.nombre+" "+user.apellido}</Option>;
+            return <Option value={user.id} key={i}>{user.nombre}</Option>;
         });
        // console.log(usersPorId);
        // console.log(users);

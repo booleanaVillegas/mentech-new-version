@@ -8,7 +8,7 @@ const IndividualChallenge = (props) => {
         return (
         
             <section className='indv-challenge'>
-            <figure className="fig-challenge-complex"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
+            <figure className="fig-challenge-complex"><img className="img-challenge" src="https://image.flaticon.com/icons/svg/476/476863.svg" alt="icon-group"/></figure>
                <div className="cont-info-reto">
                 <h1 style={{ padding: '15px', fontSize:'20pt' }}>Conflicto</h1>
                 <p className='text-challenge'>{props.challenge.identificacion}</p>
@@ -26,7 +26,7 @@ const IndividualChallenge = (props) => {
         return (
         
             <section className='indv-challenge'>
-            <figure className="fig-challenge"><img className="img-challenge" src="https://images-eu.ssl-images-amazon.com/images/I/41BhKPIAyjL.png" alt="icon-group"/></figure>
+            <figure className="fig-challenge"><img className="img-challenge" src="https://image.flaticon.com/icons/svg/476/476863.svg" alt="icon-group"/></figure>
                 <div className='cont-info-reto'>
                 <h1 style={{ padding: '15px', fontSize:'20pt' }}>{props.challenge.tema}</h1>
                 <p className='text-challenge'>{props.challenge.descripcion}</p>

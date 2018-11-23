@@ -35,10 +35,7 @@ export const signUp = (newUser) => {
             return firestore.collection('users').doc(resp.user.uid).set({
                nombre: newUser.nombre,
                email: newUser.email,
-               apellido: newUser.apellido, 
-               edad: newUser.edad,
-               barrio: newUser.barrio,
-               nivel: "0",
+               nivel: "1",
                avatar: 'https://firebasestorage.googleapis.com/v0/b/mentech-f7725.appspot.com/o/monster.svg?alt=media&token=e6027f63-35e6-40c3-bd8d-5113ef33d1d5'
             })
         }).then(()=>{

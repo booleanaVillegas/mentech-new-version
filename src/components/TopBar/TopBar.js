@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const TopBar = (props) => {
     const {auth}= props
-    if(auth.uid){
+    if(auth.uid && props.location.pathname!=='/moderador'){
     return (
         <div className='top-bar'>
            <h1 className='title'>
