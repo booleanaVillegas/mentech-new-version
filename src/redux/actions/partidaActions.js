@@ -47,8 +47,21 @@ export const newPartida = (partida) => {
     }
 }
 
-export const setPuntos =(partida, puntos, equipo) => {
-
+export const setPuntos =(partida, equipo1, equipo2) => {
+    return (dispatch, getState, {
+        getFirebase,
+        getFirestore
+    }) => {
+        const firestore = getFirestore();  
+        firestore.collection('partidas').doc(partida.id).update({
+            puntos1: (partida.puntos1+equipo1),
+            puntos2: (partida.puntos2+equipo2),
+         }).then(()=>{
+            dispatch({ type: 'SET_PUNTOS_SUCCESS'});
+        }).catch(err=>{
+            dispatch({ type: 'SET_PUNTOS_ERROR', err })
+        })
+    }
 }
 
 

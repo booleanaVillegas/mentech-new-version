@@ -9,28 +9,41 @@ import { Redirect } from 'react-router-dom'
 import Preguntas from '../../components/Preguntas/Preguntas'
 import QrReader from "react-qr-reader";
 import DisplayInfo from '../../components/DisplayInfo/DisplayInfo'
+import {setPuntos} from '../../redux/actions/partidaActions'
+
 
 class Challenge extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            complex: false,
-            simple: false,
             typeChallenge: 'none',
-            result: "No result"
+            result: "No result",
+            color: 'black',
+            resultPregunta: ' ',
+            partidaActual: ' ',
+            pregunta: ' ',
+            sabiasque: ' ',
+            challenge:' ',
+            complex: ' ' ,
+            sorpresa: ' ',
         }
         this.noChallenge = this.noChallenge.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleScan = this.handleScan.bind(this);
         this.handleError = this.handleError.bind(this);
+        this.setNewRandoms = this.setNewRandoms.bind(this);
+        this.validarPregunta = this.validarPregunta.bind(this);
+
+
     }
-
-
+ 
     noChallenge = () => {
         this.setState({
-            typeChallenge: 'none'
+            typeChallenge: 'none',
+            resultPregunta: ''
         });
+        
     }
 
     handleScan(data) {
@@ -49,23 +62,50 @@ class Challenge extends React.Component {
     }
    
     handleClick = (e) => {
+        
+        this.setNewRandoms();        
+
         console.log (e.target.id)
         this.setState({
             typeChallenge: e.target.id
         })
     };
-    render() {
-        const { challenges, auth, complex, preguntas, partida, sabiasques ,sorpresas } = this.props;
 
-        //console.log(partida);
-        //random rumber
+    validarPregunta = (e) => {
+        console.log(e.target.id);
+        if (e.target.id === this.state.pregunta.resp) {
+            console.log('yay 5 puntos');
+            this.setState({
+                color: 'yellowgreen',
+            resultPregunta: '¡Muy Bien!'
+            });
+            console.log(this.state.partidaActual)
+            //this.props.setPuntos(this.state.partidaActual,3,5)
+        } else if (e.target.id === this.state.pregunta.medioresp) {
+            console.log('yay 3 puntos');
+            this.setState({
+                color: 'darkorange',
+            resultPregunta: 'Más o menos'
+            });
+        } else {
+            console.log('nope 0 puntos');
+            this.setState({
+                color: 'crimson',
+            resultPregunta: 'Incorrecto :('
+            });
+        }
+    }
+    setNewRandoms= ()=>{
+        const { challenges, complex, preguntas, partida, sabiasques ,sorpresas } = this.props;
+
+        
         const number = challenges ? Math.floor(Math.random() * (challenges.length)) : 0;
         const numberComplex = complex ? Math.floor(Math.random() * (complex.length)) : 0;
         const numberPreguntas = preguntas? Math.floor(Math.random() * (preguntas.length)) : 0;
         const numberSorpresas = sorpresas? Math.floor(Math.random() * (sorpresas.length)) : 0;
         const numberSabiasques = sabiasques? Math.floor(Math.random() * (sabiasques.length)) : 0;
 
-        //Selected item
+     
         const actualPartida = partida? partida[0]: ''; 
         let myChallenge = challenges ? challenges[number] : null;
         let complexChallenge = complex ? complex[numberComplex] : null;
@@ -73,11 +113,23 @@ class Challenge extends React.Component {
         let actualSorpresa = sorpresas? sorpresas[numberSorpresas]: '';
         let actualSabiasque = sabiasques? sabiasques[numberSabiasques]: '';
 
-        
-        //   let myComplexChallenge = this.props.ComplexChallenges ? this.props.ComplexChallenges[number] : null;   
+        this.setState({
+            partidaActual: actualPartida,
+            pregunta: actualPregunta,
+            sabiasque: actualSabiasque,
+            challenge: myChallenge,
+            complex: complexChallenge,
+            sorpresa: actualSorpresa
+        });
+    }
+    render() {
+        const { auth, partida } = this.props; 
+        const actualPartida = partida? partida[0]: ' ';
+        console.log(actualPartida);
+
         if (!auth.uid) return <Redirect to='/login' />
 
-
+        
         switch (this.state.typeChallenge) {
             case 'none':
                 return (
@@ -89,7 +141,8 @@ class Challenge extends React.Component {
                         <p>Puntos: {actualPartida.puntos2}</p>
 
                         <div className="cont-icons-btn">
-                            <img onClick={this.handleClick} id='qr' className='icons-buttons' src="/assets/qr.svg" alt=""/>
+                        {/*TODO:nvolver a cambiar simple por qr despues*/}
+                            <img onClick={this.handleClick} id='simple' className='icons-buttons' src="/assets/qr.svg" alt=""/>
                             <img onClick={this.handleClick} id='sabiasque' className='icons-buttons' src="/assets/sabiasque.svg" alt=""/>
                             <img onClick={this.handleClick} id='pregunta' className='icons-buttons' src="/assets/pregunta.svg" alt=""/>
                             <img onClick={this.handleClick} id='sorpresa' className='icons-buttons' src="/assets/otro.svg" alt=""/>
@@ -99,14 +152,14 @@ class Challenge extends React.Component {
                 return (
                     <section className='challenge'>
 
-                        <IndividualChallenge challenge={myChallenge} volver={this.noChallenge} type={this.state.typeChallenge} />
+                        <IndividualChallenge challenge={this.state.challenge} volver={this.noChallenge} type={this.state.typeChallenge} />
                     </section>);
 
             case 'complex':
                 return (
                     <section className='challenge'>
 
-                        <IndividualChallenge challenge={complexChallenge} volver={this.noChallenge} type={this.state.typeChallenge} />
+                        <IndividualChallenge challenge={this.state.complex} volver={this.noChallenge} type={this.state.typeChallenge} />
                     </section>)
             case 'qr':
                 return (
@@ -128,18 +181,24 @@ class Challenge extends React.Component {
                     </section>)
             case 'pregunta':
                 return (
-                    <Preguntas className='challenge' question={actualPregunta} volver={this.noChallenge}/>
+                    <Preguntas className='challenge'
+                    question={this.state.pregunta}
+                    volver={this.noChallenge}
+                    validar={this.validarPregunta}
+                    colorAlert={this.state.color}
+                    result={this.state.resultPregunta}
+                    />
                 )
             case 'sabiasque':
             return (
                 <section className='challenge'>
-                <DisplayInfo className='challenge' volver={this.noChallenge} titulo="¿Sabias Qué?" contenido={actualSabiasque.desc}/>
+                <DisplayInfo className='challenge' volver={this.noChallenge} titulo="¿Sabias Qué?" contenido={this.state.sabiasque.desc}/>
                 </section>
             )
             case 'sorpresa':
             return(
                 <section className='challenge'>
-                <DisplayInfo className='challenge' volver={this.noChallenge} titulo="Casilla Sorpresa" contenido={actualSorpresa.desc}/>
+                <DisplayInfo className='challenge' volver={this.noChallenge} titulo="Casilla Sorpresa" contenido={this.state.sorpresa.desc}/>
                 </section>
             )
             default:
@@ -185,9 +244,13 @@ const mapStateToProps = (state) => {
         sorpresas: state.firestore.ordered.sorpresas,
     }
 }
-
+const mapDispatchToProps = (dispatch) =>{
+    return{
+      setPuntos: (partida, equipo1, equipo2) => dispatch(setPuntos(partida, equipo1, equipo2))
+    }
+  }
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps,mapDispatchToProps),
     firestoreConnect([
         { collection: 'complex' },
         { collection: 'challenges' },

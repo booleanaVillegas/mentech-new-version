@@ -10,7 +10,9 @@
 .title-info{
     font-weight: bold;
     font-size: 14pt;
+
 }
 .text-info{
-    padding: 50px
+    padding: 0 50px;
+   
 }
