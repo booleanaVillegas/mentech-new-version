@@ -2,6 +2,7 @@ import * as React from 'react';
 import './Learned.css';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import Timer from '../../components/Timer/Timer'
 
 class Learned extends React.Component {
     
@@ -10,7 +11,7 @@ class Learned extends React.Component {
         if(!auth.uid) return <Redirect to='/login'/>   
   return ( 
       <section className='learned'>
-     <h1 style={{padding: '15px'}}> Aún no has aprendido ningun tema nuevo </h1>
+    <Timer time={1} type='minutes'/>
 
       </section>
      
