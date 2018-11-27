@@ -4,7 +4,9 @@ import './ProfileInfo.css';
 const ProfileInfo = (props) => {
     return (
         <div className="profile-info">
-        <div className="profilepic"><img src={props.image} alt=""/></div>
+        <div className="profilepic">
+        <figure className="figure-perfil" style={{backgroundImage: 'url("'+props.image+'")'}}></figure>
+       </div>
         <div className="mentor-info">
             <h1 className='profile-name'> {props.name} </h1>       
             <h1 className='lil-info' style={{marginBottom: '0'}}>{props.barrio}</h1>      

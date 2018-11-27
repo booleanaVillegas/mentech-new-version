@@ -1,0 +1,57 @@
+.container-reto-indv {
+    width: 100vw;
+    padding: 15px
+}
+
+.info-mentor-reto {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.figure-user-pq {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.img-user-pq {
+    width: 100%;
+}
+
+.figure-post {
+    width: 100%;
+
+}
+
+.img-post {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.cont-likes-dislikes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly
+}
+
+.btn-icons {
+    font-size: 16pt;
+}
+
+.btn-upload {
+    position: fixed;
+    font-size: 40pt;
+    bottom: 12vh;
+    right: 20px;
+}
+
+.file-input-btn {
+    font-size: 40pt;
+    margin-left: -40pt;
+    opacity: 0;
+    position: absolute;
+}

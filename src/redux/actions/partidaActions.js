@@ -12,7 +12,7 @@ export const newPartida = (partida) => {
         let shuffledPlayers = shuffle(partida.jugadores);
 
         for (let i = 0; i < partida.jugadores.length; i++) {
-            if (i <= mitad) {
+            if (i < mitad) {
                 equipoUno.push(shuffledPlayers[i])
             } else {
                 equipoDos.push(shuffledPlayers[i])
@@ -23,7 +23,7 @@ export const newPartida = (partida) => {
                 jugadores: partida.jugadores,
                 fecha: new Date(),
                 enCurso: true,
-                finalizada: false,
+               
                 equipo1: equipoUno,
                 equipo2: equipoDos,
                 ganador: '',
@@ -54,12 +54,29 @@ export const setPuntos =(partida, equipo1, equipo2) => {
     }) => {
         const firestore = getFirestore();  
         firestore.collection('partidas').doc(partida.id).update({
-            puntos1: (partida.puntos1+equipo1),
-            puntos2: (partida.puntos2+equipo2),
+            puntos1: parseInt(parseInt(partida.puntos1)+parseInt(equipo1)),
+            puntos2: parseInt(parseInt(partida.puntos2)+parseInt(equipo2)),
          }).then(()=>{
             dispatch({ type: 'SET_PUNTOS_SUCCESS'});
         }).catch(err=>{
             dispatch({ type: 'SET_PUNTOS_ERROR', err })
+        })
+    }
+}
+
+export const finalizarPartida =(partida) => {
+    return (dispatch, getState, {
+        getFirebase,
+        getFirestore
+    }) => {
+        const firestore = getFirestore();  
+        firestore.collection('partidas').doc(partida.id).update({
+            enCurso: false,
+            
+         }).then(()=>{
+            dispatch({ type: 'FINALIZADA_SUCCESS'}, partida);
+        }).catch(err=>{
+            dispatch({ type: 'FINALIZADA_ERROR', err })
         })
     }
 }

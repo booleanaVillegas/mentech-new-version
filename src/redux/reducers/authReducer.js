@@ -33,6 +33,18 @@ const authReducer =(state=initState, action)=>{
             ...state,
             authError: action.err.message
         }
+        case 'PROFILE_PIC_SUCCESS':
+        console.log('Subi foto perfil');
+        return{
+            ...state,
+            authError: null
+        }
+        case 'PROFILE_PIC_ERROR':
+        console.log(action.err);
+        return{
+            ...state,
+            authError: action.err.message
+        }
         default:
         return state
     }

@@ -1,21 +1,35 @@
-.moderador{
+.moderador {
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     align-content: center;
-flex-direction: row;
+    flex-direction: column;
 }
-.input-moderador{
- background-color: aqua
+
+.resumen-equipos {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+    flex-direction: row;
 }
-.title{
+.title-moderador{
     color: #1d2539;
     font-family: 'Catamaran', sans-serif;
     font-weight: 900;
-    font-size: 30px;
+    font-size: 24pt !important;
     text-transform: uppercase;
     margin: 0;
     padding: 0;
+}
+.fig-logo-mod{
+    width: 20vw;  
+    margin-bottom: 50px;
+   
+}
+.img-logo-mod{
+    width: 100%;
 }

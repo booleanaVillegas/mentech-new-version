@@ -1,10 +1,12 @@
-.main{
+.main {
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
     align-items: center;
-   
+
     flex-direction: column;
+
 }
+
